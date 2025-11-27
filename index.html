@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duartetox</title>
+
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Calendar -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+</head>
+<body>
+
+<div class="app">
+
+  <!-- LOGIN -->
+  <section id="login" class="screen active">
+      <h1>Duartetox</h1>
+      <p class="subtitle">Sistema de Agendamentos</p>
+
+      <select id="perfil">
+        <option value="">Selecione o perfil</option>
+        <option value="paciente">Paciente</option>
+        <option value="empresa">Empresa</option>
+        <option value="admin">Administrador</option>
+      </select>
+
+      <input id="user" placeholder="Usuário">
+      <input id="pass" type="password" placeholder="Senha">
+
+      <button onclick="login()" class="btn">Entrar</button>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="screen">
+      <h2>Menu</h2>
+
+      <div class="card" onclick="navigate('agendar')">Agendar exame</div>
+      <div class="card" onclick="navigate('consultas')">Exames agendados</div>
+      <div class="card" onclick="navigate('sintomas')">Registrar sintomas</div>
+      <div class="card admin-only" style="display:none" onclick="navigate('admin')">Admin</div>
+  </section>
+
+  <!-- AGENDAR -->
+  <section id="agendar" class="screen">
+      <h2>Novo Agendamento</h2>
+
+      <input id="nomePaciente" placeholder="Nome completo">
+      <input id="cpfPaciente" placeholder="CPF">
+      <input id="empresa" placeholder="Empresa (opcional)">
+
+      <select id="tipoExame">
+        <option value="">Tipo de exame</option>
+        <option>Admissional</option>
+        <option>Periódico</option>
+        <option>Demissional</option>
+      </select>
+
+      <input id="dataExame" placeholder="Selecione a data">
+      <select id="horarioExame">
+        <option value="">Horário</option>
+      </select>
+
+      <button onclick="confirmarAgendamento()" class="btn">Confirmar</button>
+      <button onclick="navigate('menu')" class="btn-secondary">Voltar</button>
+  </section>
+
+  <!-- CONSULTAS -->
+  <section id="consultas" class="screen">
+      <h2>Exames Agendados</h2>
+      <ul id="listaAgendamentos" class="list"></ul>
+      <button onclick="navigate('menu')" class="btn-secondary">Voltar</button>
+  </section>
+
+  <!-- SINTOMAS -->
+  <section id="sintomas" class="screen">
+      <h2>Sintomas</h2>
+      <textarea id="campo-sintomas"></textarea>
+      <button onclick="registrarSintomas()" class="btn">Registrar</button>
+      <button onclick="navigate('menu')" class="btn-secondary">Voltar</button>
+  </section>
+
+  <!-- ADMIN -->
+  <section id="admin" class="screen">
+      <h2>Painel Admin</h2>
+      <ul id="listaAdmin" class="list"></ul>
+      <button onclick="limparTodosAgendamentos()" class="btn-secondary">Limpar tudo</button>
+      <button onclick="navigate('menu')" class="btn-secondary">Voltar</button>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
