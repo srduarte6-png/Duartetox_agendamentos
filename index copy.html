@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duartetox 2.0 - Agendamentos</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Flatpickr (calendário) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- LOGIN -->
+  <section id="login" class="screen active">
+    <h1>Duartetox</h1>
+    <p class="subtitle">Sistema de Agendamentos Toxicológicos</p>
+
+    <select id="perfil">
+      <option value="">Selecione o perfil</option>
+      <option value="paciente">Paciente / Motorista</option>
+      <option value="empresa">Empresa</option>
+      <option value="admin">Administrador</option>
+    </select>
+
+    <input id="user" placeholder="Usuário">
+    <input id="pass" type="password" placeholder="Senha">
+
+    <button onclick="login()" class="btn btn-primary">Entrar</button>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="screen">
+    <h2>Menu principal</h2>
+
+    <div class="card" onclick="navigate('agendar')">Agendar exame</div>
+    <div class="card" onclick="navigate('consultas')">Exames agendados</div>
+    <div class="card" onclick="navigate('sintomas')">Registrar sintomas</div>
+    <div class="card admin-only" style="display:none" onclick="navigate('admin')">Painel administrativo</div>
+  </section>
+
+  <!-- AGENDAR -->
+  <section id="agendar" class="screen">
+    <h2>Novo agendamento</h2>
+
+    <label>Nome completo</label>
+    <input id="nomePaciente" placeholder="Nome e sobrenome">
+
+    <label>CPF</label>
+    <input id="cpfPaciente" placeholder="Somente números" maxlength="14">
+
+    <label>Empresa (opcional)</label>
+    <input id="empresa" placeholder="Nome da empresa">
+
+    <label>Tipo de exame</label>
+    <select id="tipoExame">
+      <option value="">Selecione</option>
+      <option>Admissional</option>
+      <option>Periódico</option>
+      <option>Demissional</option>
+      <option>Renovação de CNH</option>
+    </select>
+
+    <label>Data do exame</label>
+    <input id="dataExame" placeholder="Selecione a data">
+
+    <label>Horário</label>
+    <select id="horarioExame">
+      <option value="">Selecione</option>
+    </select>
+
+    <button onclick="confirmarAgendamento()" class="btn btn-primary">Confirmar agendamento</button>
+    <button onclick="navigate('menu')" class="btn btn-secondary">Voltar</button>
+  </section>
+
+  <!-- CONSULTAS -->
+  <section id="consultas" class="screen">
+    <h2>Exames agendados</h2>
+    <ul id="listaAgendamentos" class="list"></ul>
+    <p id="semAgendamentos" class="empty">Nenhum agendamento registrado.</p>
+    <button onclick="navigate('menu')" class="btn btn-secondary">Voltar</button>
+  </section>
+
+  <!-- SINTOMAS -->
+  <section id="sintomas" class="screen">
+    <h2>Registrar sintomas</h2>
+    <textarea id="campo-sintomas" placeholder="Descreva os sintomas do paciente..."></textarea>
+    <button onclick="registrarSintomas()" class="btn btn-primary">Registrar</button>
+    <button onclick="navigate('menu')" class="btn btn-secondary">Voltar</button>
+  </section>
+
+  <!-- ADMIN -->
+  <section id="admin" class="screen">
+    <h2>Painel administrativo</h2>
+    <ul id="listaAdmin" class="list"></ul>
+    <p id="semAgendamentosAdmin" class="empty">Nenhum agendamento registrado.</p>
+    <button onclick="limparTodosAgendamentos()" class="btn btn-secondary btn-danger">Limpar todos</button>
+    <button onclick="navigate('menu')" class="btn btn-secondary">Voltar</button>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
